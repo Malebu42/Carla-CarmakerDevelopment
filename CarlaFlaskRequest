@@ -1,0 +1,10 @@
+import requests
+
+#x = requests.get('http://127.0.0.1:9000')
+y = requests.post('http://127.0.0.1:9000/TestAgent') 
+
+#print(y.text)
+print(y) #json file
+
+
+#this code in carla
