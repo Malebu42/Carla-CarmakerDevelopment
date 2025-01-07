@@ -1,0 +1,29 @@
+#helloflask.py
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route("/")
+def hello_world():
+    return "Hello, World!"
+
+#@app.route("/self")
+#def hello_me():
+#   return "Hello me"
+
+@app.route("/TestAgent", methods=["POST"])
+def agent_feedback():
+    print("test Agent") #server instance
+    return "Hello Test Agent" #clientside
+
+    #agent code here
+
+# main driver function
+if __name__ == '__main__':
+    app.run(port=9000)
+
+    # run() method of Flask class runs the application 
+    # on the local development server.
+    #app.run()
+
