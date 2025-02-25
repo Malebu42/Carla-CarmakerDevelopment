@@ -1,0 +1,34 @@
+from flask import Flask, request, jsonify
+import logging
+
+app = Flask(__name__)
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+
+@app.route('/process', methods=['POST'])
+def process_data():
+    try:
+        data = request.json  # Receive data
+        if not data:
+            logging.error("No data received")
+            return jsonify({"error": "No data received"}), 400
+
+        logging.info(f"Received data: {data}")
+
+        # Example: Process the data (you can modify this)
+        vehicle_speed = data.get("VehicleSpeed")
+        simulation_status = data.get("SimulationStatus")
+
+        # Log received values
+        logging.info(f"Vehicle Speed: {vehicle_speed} km/h")
+        logging.info(f"Simulation Status: {simulation_status}")
+
+        return jsonify({"status": "success"}), 200
+
+    except Exception as e:
+        logging.exception("Error processing request")
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", port=5001, debug=True)  # Make sure the port matches the CarMaker script
